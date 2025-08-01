@@ -1,0 +1,80 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: app
+      MYSQL_USER: app
+      MYSQL_PASSWORD: pass
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - backend
+
+  postgres:
+    image: postgres:15
+    container_name: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: app
+      POSTGRES_USER: app
+      POSTGRES_PASSWORD: pass
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    networks:
+      - backend
+
+  node-app:
+    build:
+      context: ./gate-simulator
+    container_name: gate-simulator
+    restart: always
+    ports:
+      - "9999:9999"
+    networks:
+      - backend
+    working_dir: /usr/src/app
+    command: npm start
+    volumes:
+      - ./gate-simulator:/usr/src/app
+
+  aqa-shop:
+    image: openjdk:17
+    container_name: aqa-shop
+    restart: always
+    depends_on:
+      - mysql
+      - postgres
+      - node-app
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./aqa-shop.jar:/aqa-shop.jar
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/app
+      SPRING_DATASOURCE_USERNAME: app
+      SPRING_DATASOURCE_PASSWORD: pass
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: com.mysql.cj.jdbc.Driver
+      SPRING_JPA_DATABASE_PLATFORM: org.hibernate.dialect.MySQL8Dialect
+      SPRING_JPA_HIBERNATE_DDL_AUTO: create-drop
+      SPRING_PAYMENT_GATE_URL: http://gate-simulator:9999/payment
+      SPRING_CREDIT_GATE_URL: http://gate-simulator:9999/credit
+    command: [ "java", "-jar", "/aqa-shop.jar" ]
+    networks:
+      - backend
+
+volumes:
+  mysql_data:
+  pg_data:
+
+networks:
+  backend:
+    driver: bridge

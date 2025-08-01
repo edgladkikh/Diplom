@@ -1,0 +1,1 @@
+{"uuid":"d35a6ece-c330-48aa-9358-3a20a1e44332","name":"2. Запись в базе данных об отказе оплаты DECLINED картой","children":["af454c41-aff3-4721-9226-289778f72d5c"],"befores":[{"name":"setUp","status":"passed","stage":"finished","steps":[],"attachments":[],"parameters":[],"start":1754037222539,"stop":1754037223415}],"afters":[],"start":1754037222396,"stop":1754037236239}

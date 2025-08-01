@@ -1,0 +1,1 @@
+{"uuid":"0dde21a8-0ffc-4a16-8452-4e11cf132d0e","name":"1. Успешная оплата APPROVED картой","children":["5b676fc7-c602-454b-82ed-673b68e43f08"],"befores":[{"name":"setUp","status":"passed","stage":"finished","steps":[],"attachments":[],"parameters":[],"start":1753977160635,"stop":1753977161217}],"afters":[],"start":1753977160508,"stop":1753977171936}
