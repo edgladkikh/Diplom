@@ -1,1 +1,0 @@
-{"uuid":"3bcb6a8d-1c02-496d-bca3-7b789ad91ff0","name":"1. Запись в базе данных об успешной оплате APPROVED картой","children":["bc5845bd-d317-4c03-b413-85a3fa649f19"],"befores":[{"name":"setUp","status":"passed","stage":"finished","steps":[],"attachments":[],"parameters":[],"start":1754037606311,"stop":1754037607177}],"afters":[],"start":1754037606198,"stop":1754037609695}
