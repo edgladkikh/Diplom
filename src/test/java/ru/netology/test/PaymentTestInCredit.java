@@ -42,7 +42,7 @@ public class PaymentTestInCredit {
         mainPage.fillCVC(DataGenerator.generateCVC());
         mainPage.submit();
         mainPage.shouldSeeSuccess();
-        assertEquals("APPROVED", SQLHelper.getPaymentStatus());
+        assertEquals("APPROVED", SQLHelper.getCreditPayment());
     }
 
     @Test
@@ -55,7 +55,7 @@ public class PaymentTestInCredit {
         mainPage.fillCVC(DataGenerator.generateCVC());
         mainPage.submit();
         mainPage.shouldSeeError();
-        assertEquals("DECLINED", SQLHelper.getPaymentStatus());
+        assertEquals("DECLINED", SQLHelper.getCreditPayment());
     }
 
     @Test

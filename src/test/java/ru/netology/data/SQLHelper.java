@@ -6,23 +6,30 @@ import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class SQLHelper {
     private static final QueryRunner runner = new QueryRunner();
-    private static final String url = "jdbc:mysql://localhost:3306/app";
-    private static final String user = "app";
-    private static final String password = "pass";
 
-    @SneakyThrows
-    private static Connection getConnection() {
-        return DriverManager.getConnection(url, user, password);
+    private SQLHelper() {
+    }
+
+    private static Connection getConnection() throws SQLException {
+        return DriverManager.getConnection(System.getProperty("db.url"), "app", "pass" );
     }
 
     @SneakyThrows
     public static String getPaymentStatus() {
-        Connection conn = getConnection();
+        var connection = getConnection();
         var sql = "SELECT status FROM payment_entity ORDER BY created DESC LIMIT 1";
-        return runner.query(conn, sql, new ScalarHandler<>());
+        return runner.query(connection, sql, new ScalarHandler<>());
+    }
+
+    @SneakyThrows
+    public static String getCreditPayment() {
+        var connection = getConnection();
+        var sql = "SELECT status FROM credit_request_entity ORDER BY created DESC LIMIT 1;";
+        return runner.query(connection, sql, new ScalarHandler<>());
     }
 
     @SneakyThrows

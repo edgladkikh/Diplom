@@ -11,3 +11,6 @@
 
 Подробнее об успешных и неуспешных кейсах можно увидеть в отчете Allure.
 
+<img width="1052" height="710" alt="Allure" src="https://github.com/user-attachments/assets/0ac3190b-0223-420f-ab02-d3d27b9903c8" />
+<img width="1054" height="885" alt="Allure1" src="https://github.com/user-attachments/assets/bfddb6eb-d656-437a-9759-da58915e5426" />
+<img width="1046" height="880" alt="Allure2" src="https://github.com/user-attachments/assets/bde63386-726f-4c44-bf8a-db3811163787" />
